@@ -29,7 +29,7 @@ public class EchoServerMultiThreaded  {
 		System.out.println("Server ready..."); 
 		while (true) {
 			Socket clientSocket = listenSocket.accept();
-			System.out.println("Connexion from:" + clientSocket.getInetAddress());
+			System.out.println("Connexion from:" + clientSocket.getInetAddress() + "on port " + clientSocket.getPort());
 			ClientThread ct = new ClientThread(clientSocket);
 			ct.start();
 		}

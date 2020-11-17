@@ -16,7 +16,7 @@ public class ClientThread
 	
   private static ArrayList<Socket> socketList = new ArrayList<Socket>();
 	private Socket clientSocket;
-	
+
 	ClientThread(Socket s) {
 		this.clientSocket = s;
 		socketList.add(s);
@@ -28,7 +28,8 @@ public class ClientThread
   	**/
 	public void run() {
     	  try {
-    		BufferedReader socIn = null;
+			  System.out.println("thread is running for port: " + clientSocket.getPort());
+			  BufferedReader socIn = null;
     		socIn = new BufferedReader(
     			new InputStreamReader(clientSocket.getInputStream()));    
     		// PrintStream socOut = new PrintStream(clientSocket.getOutputStream());
@@ -36,21 +37,27 @@ public class ClientThread
     		while (true) {
 
 			    String line = socIn.readLine();
+				System.out.println("message from port " + clientSocket.getPort() + ": " + line);
+				System.out.println(socketList);
+				if (line.equals(".")) {
+					socketList.remove(this.clientSocket);
+					System.out.println(socketList);
+					this.stop();
+					break;
+				}
 			    for(Socket socket: socketList){
 			    	if (socket != this.clientSocket) {
-				    	socOut = new PrintStream(socket.getOutputStream());
-				    	socOut.println("port: " + socket.getPort() + 
-				    			", LocalAddress:" + socket.getLocalAddress() + 
-				    			line);
+						socOut = new PrintStream(socket.getOutputStream());
+						socOut.println("port: " + socket.getPort() + ": " + line);
 			    	}
 			    }
-	        	
     		}
-    	} catch (Exception e) {
-        	System.err.println("Error in EchoServer:" + e); 
+
+		  } catch (Exception e) {
+        	System.err.println("Error in EchoServer:" + e);
         }
-       }
-  
+	}
+
   }
 
   
