@@ -13,8 +13,8 @@ import java.util.LinkedList;
 
 public class EchoServerMultiThreaded {
 	private static LinkedList<String> chatHistory = new LinkedList<>();
-	// private static final String filePath = "stream/ChatHistory.txt";
-	private static final String filePath = "C:\\Users\\jeffc\\IdeaProjects\\TP-SOCKET\\src\\stream\\ChatHistory.txt" ;
+	private static final String filePath = "stream/ChatHistory.txt";
+	// private static final String filePath = "C:\\Users\\jeffc\\IdeaProjects\\TP-SOCKET\\src\\stream\\ChatHistory.txt" ;
 	private static final File file = new File(filePath);
 
 	public static LinkedList<String> getChatHistory() {
@@ -22,8 +22,9 @@ public class EchoServerMultiThreaded {
 	}
 
 	public static int addHistory(String msg) {
+		System.out.println(chatHistory);
 		chatHistory.add(msg);
-		// serializeMessage(msg);
+		serializeMessage(msg);
 		return 1;
 	}
 
@@ -40,7 +41,7 @@ public class EchoServerMultiThreaded {
 		}
 		try {
 			listenSocket = new ServerSocket(Integer.parseInt(args[0])); //port
-			// loadChatHistory();
+			loadChatHistory();
 			System.out.println("Server ready...");
 			while (true) {
 				Socket clientSocket = listenSocket.accept();
@@ -58,11 +59,11 @@ public class EchoServerMultiThreaded {
 		try {
 			InputStreamReader reader = new InputStreamReader(new FileInputStream(file));
 			BufferedReader br = new BufferedReader(reader);
-			String line = "";
-			line = br.readLine();
+			// br.reset();
+			String line = br.readLine();
 			while (line != null) {
-				line = br.readLine();
 				chatHistory.add(line);
+				line = br.readLine();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,14 +72,10 @@ public class EchoServerMultiThreaded {
 	}
 
 	private static int serializeMessage(String msg) {
-		System.out.println("serializing message");
-
 		try {
-			PrintWriter printWriter = new PrintWriter(new FileWriter(file));
-			printWriter.println(msg);
-			// out.flush();
-			printWriter.close();
-
+			FileOutputStream fos = new FileOutputStream(filePath, true);
+			fos.write(msg.getBytes());
+			fos.write("\r\n".getBytes());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

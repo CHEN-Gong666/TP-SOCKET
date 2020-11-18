@@ -36,13 +36,13 @@ public class ClientThread extends Thread {
 
 			  for (String m: chatHistory) {
 				  socOut = new PrintStream(clientSocket.getOutputStream());
-				  socOut.println("1Message from port " + clientSocket.getPort() + ": " + m);
+				  socOut.println(m);
 			  }
 
     		while (true) {
 
 				String line = socIn.readLine();
-				String outputLine = "2Message from port " + clientSocket.getPort() + ": " + line;
+				String outputLine = "Message from port " + clientSocket.getPort() + ": " + line;
 
 				if (line.equals(".")) {
 					socketList.remove(this.clientSocket);
@@ -58,6 +58,7 @@ public class ClientThread extends Thread {
 
 			    for(Socket socket: socketList){
 					socOut = new PrintStream(socket.getOutputStream());
+					System.out.println(outputLine);
 					socOut.println(outputLine);
 			    }
     		}
