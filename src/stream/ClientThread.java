@@ -30,31 +30,35 @@ public class ClientThread extends Thread {
     	  try {
 			  System.out.println("thread is running for port: " + clientSocket.getPort());
 			  BufferedReader socIn = null;
-    		socIn = new BufferedReader(
-    			new InputStreamReader(clientSocket.getInputStream()));    
-    		// PrintStream socOut = new PrintStream(clientSocket.getOutputStream());
-    		PrintStream socOut;
+    			socIn = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+    			// PrintStream socOut = new PrintStream(clientSocket.getOutputStream());
+			  PrintStream socOut;
+
+			  for (String m: chatHistory) {
+				  socOut = new PrintStream(clientSocket.getOutputStream());
+				  socOut.println("1Message from port " + clientSocket.getPort() + ": " + m);
+			  }
+
     		while (true) {
 
-			    String line = socIn.readLine();
-				System.out.println("message from port " + clientSocket.getPort() + ": " + line);
-				System.out.println(socketList);
+				String line = socIn.readLine();
+				String outputLine = "2Message from port " + clientSocket.getPort() + ": " + line;
+
 				if (line.equals(".")) {
 					socketList.remove(this.clientSocket);
 					System.out.println(socketList);
 					this.stop();
 					break;
 				}
-				for (String m: chatHistory) {
-					socOut = new PrintStream(clientSocket.getOutputStream());
-					socOut.println("port: " + clientSocket.getPort() + ": " + line);
-				}
+
+				EchoServerMultiThreaded.addHistory(outputLine);
+
+				System.out.println(outputLine);
+				System.out.println(socketList);
 
 			    for(Socket socket: socketList){
-			    	if (socket != this.clientSocket) {
-						socOut = new PrintStream(socket.getOutputStream());
-						socOut.println("port: " + socket.getPort() + ": " + line);
-			    	}
+					socOut = new PrintStream(socket.getOutputStream());
+					socOut.println(outputLine);
 			    }
     		}
 
