@@ -10,11 +10,11 @@ package stream;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
-public class ClientThread
-	extends Thread {
-	
-  private static ArrayList<Socket> socketList = new ArrayList<Socket>();
+public class ClientThread extends Thread {
+	private static LinkedList<String> chatHistory = EchoServerMultiThreaded.getChatHistory();
+  	private static ArrayList<Socket> socketList = new ArrayList<Socket>();
 	private Socket clientSocket;
 
 	ClientThread(Socket s) {
@@ -45,6 +45,11 @@ public class ClientThread
 					this.stop();
 					break;
 				}
+				for (String m: chatHistory) {
+					socOut = new PrintStream(clientSocket.getOutputStream());
+					socOut.println("port: " + clientSocket.getPort() + ": " + line);
+				}
+
 			    for(Socket socket: socketList){
 			    	if (socket != this.clientSocket) {
 						socOut = new PrintStream(socket.getOutputStream());

@@ -7,17 +7,22 @@
 
 package stream;
 
-import java.io.*;
 import java.net.*;
+import java.util.LinkedList;
 
 public class EchoServerMultiThreaded  {
-  
- 	/**
+	private static LinkedList<String> chatHistory = new LinkedList<>();
+
+	public static LinkedList<String> getChatHistory() {
+		return chatHistory;
+	}
+
+	/**
   	* main method
 	* @param EchoServer port
   	* 
   	**/
-       public static void main(String args[]){ 
+   public static void main(String args[]){
         ServerSocket listenSocket;
         
   	if (args.length != 1) {

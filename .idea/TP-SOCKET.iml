@@ -9,11 +9,11 @@
       <excludeFolder url="file://$MODULE_DIR$/classes/production/TP-SOCKET" />
       <excludeFolder url="file://$MODULE_DIR$/classes/production/TP-SOCKET/stream" />
     </content>
+    <content url="file://$MODULE_DIR$/Code-Socket/out" />
     <content url="file://$MODULE_DIR$/classes" />
     <content url="file://$MODULE_DIR$/classes/production" />
     <content url="file://$MODULE_DIR$/classes/production/TP-SOCKET" />
     <content url="file://$MODULE_DIR$/classes/production/TP-SOCKET/stream" />
-    <content url="file://$MODULE_DIR$/Code-Socket/out" />
     <orderEntry type="jdk" jdkName="openjdk-15" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
