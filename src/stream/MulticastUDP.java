@@ -17,7 +17,7 @@ import javax.swing.border.Border;
 
 public class MulticastUDP extends JFrame {
 
-    private static LinkedList<String> chatHistory = new LinkedList<>();
+    private static final LinkedList<String> chatHistory = new LinkedList<>();
 
 
     static JTextArea Name;
@@ -116,7 +116,8 @@ public class MulticastUDP extends JFrame {
         }
 
         while (true) {
-            line=stdIn.readLine();
+
+            line =Send.getText();
             if (line.equals(".")) {
                 String deconnexionMsg = clientName + " leaves the chat";
                 chatHistory.add(deconnexionMsg);
@@ -127,9 +128,15 @@ public class MulticastUDP extends JFrame {
                 System.out.println("before break");
                 break;
             }
+
+
+
+
             String msgString = clientName + " : " + line;
-            msg = new DatagramPacket(msgString.getBytes(),msgString.length(),groupAddr,groupPort);
+            msg = new DatagramPacket(msgString.getBytes(), msgString.length(), groupAddr, groupPort);
+            TextOut.append(clientName + " : " + line);
             socket.send(msg);
+
         }
 
         stdIn.close();
@@ -137,7 +144,7 @@ public class MulticastUDP extends JFrame {
     }
 
     private static class ClientThreadUDP extends Thread{
-        private MulticastSocket socket;
+        private final MulticastSocket socket;
         ClientThreadUDP(MulticastSocket socket) {
             super();
             this.socket = socket;
@@ -152,6 +159,7 @@ public class MulticastUDP extends JFrame {
                     socket.receive(recv);
                     String message = new String(recv.getData(),0,recv.getLength());
                     System.out.println(message);
+                    TextOut.append(message);
                 }
             } catch (Exception e) {
                 System.err.println("Error in UDPClientReception:" + e);
