@@ -5,7 +5,7 @@
  * Authors:
  */
 
-package stream;
+package ChatTCP;
 
 import java.io.*;
 import java.net.*;
@@ -13,7 +13,7 @@ import java.util.LinkedList;
 
 public class EchoServerMultiThreaded {
 	private static LinkedList<String> chatHistory = new LinkedList<>();
-	private static final String filePath = "stream/ChatHistory.txt";
+	private static final String filePath = "C:\\Users\\hmy82\\TP-SOCKET\\TP-SOCKET\\src\\ChatTCP\\ChatHistory.txt";
 	// private static final String filePath = "C:\\Users\\jeffc\\IdeaProjects\\TP-SOCKET\\src\\stream\\ChatHistory.txt" ;
 	private static final File file = new File(filePath);
 
@@ -72,6 +72,7 @@ public class EchoServerMultiThreaded {
 	}
 
 	private static int serializeMessage(String msg) {
+		msg = "message from:"+EchoClient.getClientName()+msg;
 		try {
 			FileOutputStream fos = new FileOutputStream(filePath, true);
 			fos.write(msg.getBytes());

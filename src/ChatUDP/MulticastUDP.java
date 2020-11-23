@@ -68,15 +68,6 @@ public class MulticastUDP extends JFrame{
 
             ChangeName = new JButton("Change Name");
             ChangeName.addActionListener(new MyMonitor(aUDP));
-        /*ChangeName.addActionListener(
-                new ActionListener()
-                {
-                    public void actionPerformed(ActionEvent e)
-                    {
-                        JTextArea nta = (JTextArea)e.getSource();
-                    }
-                });
-        */
 
             TextIn = new JTextField(39);
             Name = new JTextArea(1,15);
@@ -90,6 +81,7 @@ public class MulticastUDP extends JFrame{
             Panel.add(ChangeName);
 
             f.setVisible(true);
+
             stdIn = new BufferedReader(new InputStreamReader(System.in));
 
             TextOut.append("enter your user name\n");
