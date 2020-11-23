@@ -1,4 +1,4 @@
-package stream;
+package ChatUDP;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 
 
 public class MulticastUDP extends JFrame{
@@ -26,6 +25,7 @@ public class MulticastUDP extends JFrame{
     static JButton Send;
     static JButton ChangeName;
     static JScrollPane Scroll;
+
     String clientName = "pseudo";
     String line;
     InetAddress groupAddr;
@@ -181,20 +181,39 @@ class MyMonitor implements ActionListener {
         String buttonName = e.getActionCommand();
         //System.out.println(buttonName);
         if(buttonName.equals("Change Name")){
+            String oldName = mf.clientName;
             mf.clientName = mf.Name.getText();
-            mf.TextOut .append("You've changed your name to:"+mf.clientName+'\n');
-
+            //mf.TextOut .append("You've changed your name to:"+mf.clientName+'\n');
+            String msgString = "user: "+oldName+" changed his name to: "+mf.clientName+'\n';
+            mf.msg = new DatagramPacket(msgString.getBytes(), msgString.length(), mf.groupAddr, mf.groupPort);
+            try {
+                mf.socket.send(mf.msg);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }else {
             if (buttonName.equals("send")) {
                 mf.line = mf.TextIn.getText();
                 mf.TextIn.setText("");
-                String msgString = mf.clientName + " : " + mf.line;
-                mf.msg = new DatagramPacket(msgString.getBytes(), msgString.length(), mf.groupAddr, mf.groupPort);
-                //mf.TextOut.append(mf.clientName + " : " + mf.line+'\n');
-                try {
-                    mf.socket.send(mf.msg);
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
+                if (mf.line.equals(".exit")){
+                    String msgString = "User: "+mf.clientName + " has left the chat\n";
+                    mf.msg = new DatagramPacket(msgString.getBytes(), msgString.length(), mf.groupAddr, mf.groupPort);
+                    try {
+                        mf.socket.send(mf.msg);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    System.exit(0);
+                }else {
+                    String msgString = mf.clientName + " : " + mf.line + '\n';
+                    mf.msg = new DatagramPacket(msgString.getBytes(), msgString.length(), mf.groupAddr, mf.groupPort);
+                    //mf.TextOut.append(mf.clientName + " : " + mf.line+'\n');
+                    try {
+                        mf.socket.send(mf.msg);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+
                 }
             } else {
                 JOptionPane.showMessageDialog(mf, "Unknown event" );
