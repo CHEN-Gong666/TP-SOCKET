@@ -1,15 +1,15 @@
-/***
- * MulticastUDP
- * Example of a UDP Multicalst
- * Date: 24/11/2020
- * Authors: Muye HE, Gong CHEN
+/*
+ MulticastUDP
+ Example of a UDP Multicast
+ Date: 24/11/2020
+ Authors: Muye HE, Gong CHEN
  */
 package ChatUDP;
 
 import java.awt.*;
-import java.io.BufferedReader;
+//import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+//import java.io.InputStreamReader;
 import java.net.*;
 import java.util.LinkedList;
 
@@ -48,15 +48,15 @@ public class MulticastUDP extends JFrame{
     public static void main(String[] args) throws IOException {
         MulticastUDP aUDP = new MulticastUDP();
 
-        BufferedReader stdIn = null;
+        //BufferedReader stdIn = null;
         aUDP.groupAddr = InetAddress.getByName("224.0.0.233");
 
         //DatagramPacket msg;
-        ClientThreadUDP clientThreadUDP = null;
+        ClientThreadUDP clientThreadUDP;
 
         if (args.length == 2) {
             aUDP.groupAddr = InetAddress.getByName(args[0]);
-            aUDP.groupPort = new Integer(args[1]).intValue();
+            aUDP.groupPort = Integer.parseInt(args[1]);
         }
 
         try {
@@ -93,14 +93,14 @@ public class MulticastUDP extends JFrame{
 
             f.setVisible(true);
 
-            stdIn = new BufferedReader(new InputStreamReader(System.in));
+            //stdIn = new BufferedReader(new InputStreamReader(System.in));
 
             TextOut.append("enter your user name\n");
             //System.out.print( "Please enter your name : \n" );
 
             aUDP.socket = new MulticastSocket(aUDP.groupPort);
             aUDP.socket.joinGroup(aUDP.groupAddr);
-            stdIn = new BufferedReader(new InputStreamReader(System.in));
+            //stdIn = new BufferedReader(new InputStreamReader(System.in));
             clientThreadUDP = new ClientThreadUDP(aUDP.socket);
             clientThreadUDP.start();
 
@@ -126,7 +126,8 @@ public class MulticastUDP extends JFrame{
         while (true) {
 
             //aUDP.line =stdIn.readLine();
-            if (aUDP.line.equals(".")) {
+            /*
+            if (aUDP.line.equals(".exit")) {
                 String deconnexionMsg = aUDP.clientName + " leaves the chat";
                 chatHistory.add(deconnexionMsg);
                 aUDP.msg = new DatagramPacket(deconnexionMsg.getBytes(),deconnexionMsg.length(),aUDP.groupAddr,aUDP.groupPort);
@@ -135,7 +136,7 @@ public class MulticastUDP extends JFrame{
                 clientThreadUDP.stop();
                 System.out.println("before break");
                 break;
-            }
+            }*/
 
             //String msgString = aUDP.clientName + " : " + aUDP.line;
             //aUDP.msg = new DatagramPacket(msgString.getBytes(), msgString.length(), aUDP.groupAddr, aUDP.groupPort);
@@ -143,9 +144,8 @@ public class MulticastUDP extends JFrame{
             //aUDP.socket.send(aUDP.msg);
 
         }
-
-        stdIn.close();
-        System.exit(0);
+        //stdIn.close();
+        //System.exit(0);
     }
     /**
     *Inner class of UDP
@@ -183,16 +183,17 @@ public class MulticastUDP extends JFrame{
  * it listens to the buttons to change name or send a message
  */
 class MyMonitor implements ActionListener {
-    MulticastUDP mf = null;
-    public MyMonitor(MulticastUDP ttmf) {
-        this.mf = ttmf;
+    MulticastUDP mf;
+    public MyMonitor(MulticastUDP myFrame) {
+        this.mf = myFrame;
     }
     public void actionPerformed(ActionEvent e) {
         String buttonName = e.getActionCommand();
         //System.out.println(buttonName);
         if(buttonName.equals("Change Name")){
-            String oldName = mf.clientName;
-            mf.clientName = mf.Name.getText();
+            String oldName;
+            oldName = mf.clientName;
+            mf.clientName = MulticastUDP.Name.getText();
             //mf.TextOut .append("You've changed your name to:"+mf.clientName+'\n');
             String msgString = "user: "+oldName+" changed his name to: "+mf.clientName+'\n';
             mf.msg = new DatagramPacket(msgString.getBytes(), msgString.length(), mf.groupAddr, mf.groupPort);
@@ -203,8 +204,8 @@ class MyMonitor implements ActionListener {
             }
         }else {
             if (buttonName.equals("send")) {
-                mf.line = mf.TextIn.getText();
-                mf.TextIn.setText("");
+                mf.line = MulticastUDP.TextIn.getText();
+                MulticastUDP.TextIn.setText("");
                 if (mf.line.equals(".exit")){
                     String msgString = "User: "+mf.clientName + " has left the chat\n";
                     mf.msg = new DatagramPacket(msgString.getBytes(), msgString.length(), mf.groupAddr, mf.groupPort);
