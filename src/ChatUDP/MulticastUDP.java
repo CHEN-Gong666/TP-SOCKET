@@ -30,7 +30,7 @@ public class MulticastUDP extends JFrame{
     static JPanel Panel;
     static JButton Send;
     static JButton ChangeName;
-    static JScrollPane Scroll;
+    //static JScrollPane Scroll;
 
     String clientName = "pseudo";
     String line;
