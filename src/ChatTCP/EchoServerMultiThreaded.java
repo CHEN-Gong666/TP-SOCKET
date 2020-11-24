@@ -22,6 +22,7 @@ public class EchoServerMultiThreaded {
 	}
 
 	public static int addHistory(String msg) {
+
 		System.out.println(chatHistory);
 		chatHistory.add(msg);
 		serializeMessage(msg);
@@ -30,9 +31,7 @@ public class EchoServerMultiThreaded {
 
 	/**
 	 * main method
-	 *
-	 * @param EchoServer port
-	 * @param chatHistory the chat history
+	 * @param args the server port number
 	 **/
 	public static void main(String args[]) {
 		ServerSocket listenSocket;
@@ -44,6 +43,7 @@ public class EchoServerMultiThreaded {
 			listenSocket = new ServerSocket(Integer.parseInt(args[0])); //port
 			loadChatHistory();
 			System.out.println("Server ready...");
+
 			while (true) {
 				Socket clientSocket = listenSocket.accept();
 				System.out.println("Connexion from:" + clientSocket.getInetAddress() + "on port " + clientSocket.getPort());
@@ -78,7 +78,6 @@ public class EchoServerMultiThreaded {
 		return 1;
 	}
 	/**
-	 * main method
 	 *make the message in a good format
 	 **/
 	private static int serializeMessage(String msg) {

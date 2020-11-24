@@ -1,1 +1,3 @@
 this is the chat history
+message from:User: pseudo changed his name to: HE
+message from:HE: Muye

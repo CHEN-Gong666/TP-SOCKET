@@ -42,7 +42,7 @@ public class MulticastUDP extends JFrame{
     /**
      * the main method, used when a new user joins the chat
      * @param args not used
-     * @throws IOException
+     * @throws IOException input and output error
      */
 
     public static void main(String[] args) throws IOException {
@@ -150,7 +150,6 @@ public class MulticastUDP extends JFrame{
     /**
     *Inner class of UDP
      * created when a new user joins the chat
-     @param MulticastSocket the socket created when a process is created
      */
     private static class ClientThreadUDP extends Thread{
         private final MulticastSocket socket;
@@ -182,7 +181,6 @@ public class MulticastUDP extends JFrame{
 /**
  * The action listener method
  * it listens to the buttons to change name or send a message
- * @param Echoclient the IHM as well as his attributes to modify
  */
 class MyMonitor implements ActionListener {
     MulticastUDP mf = null;
