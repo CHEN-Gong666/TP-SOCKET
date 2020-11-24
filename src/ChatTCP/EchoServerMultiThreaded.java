@@ -32,6 +32,7 @@ public class EchoServerMultiThreaded {
 	 * main method
 	 *
 	 * @param EchoServer port
+	 * @chatHistory the chat history
 	 **/
 	public static void main(String args[]) {
 		ServerSocket listenSocket;
@@ -53,6 +54,9 @@ public class EchoServerMultiThreaded {
 			System.err.println("Error in EchoServer:" + e);
 		}
 	}
+
+
+
 
 	private static int loadChatHistory() throws IOException {
 		System.out.println("loading message");
