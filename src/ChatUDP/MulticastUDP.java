@@ -1,3 +1,9 @@
+/***
+ * MulticastUDP
+ * Example of a UDP Multicalst
+ * Date: 24/11/2020
+ * Authors: Muye HE, Gong CHEN
+ */
 package ChatUDP;
 
 import java.awt.*;
@@ -33,12 +39,17 @@ public class MulticastUDP extends JFrame{
     MulticastSocket socket = null;
     DatagramPacket msg;
 
+    /**
+     * the main method, used when a new user joins the chat
+     * @param args not used
+     * @throws IOException
+     */
+
     public static void main(String[] args) throws IOException {
         MulticastUDP aUDP = new MulticastUDP();
 
         BufferedReader stdIn = null;
         aUDP.groupAddr = InetAddress.getByName("224.0.0.233");
-        //int groupPort = 50000;
 
         //DatagramPacket msg;
         ClientThreadUDP clientThreadUDP = null;
@@ -136,7 +147,11 @@ public class MulticastUDP extends JFrame{
         stdIn.close();
         System.exit(0);
     }
-
+    /**
+    *Inner class of UDP
+     * created when a new user joins the chat
+     @param MulticastSocket the socket created when a process is created
+     */
     private static class ClientThreadUDP extends Thread{
         private final MulticastSocket socket;
         ClientThreadUDP(MulticastSocket socket) {
@@ -164,6 +179,11 @@ public class MulticastUDP extends JFrame{
 
 }
 
+/**
+ * The action listener method
+ * it listens to the buttons to change name or send a message
+ * @param Echoclient the IHM as well as his attributes to modify
+ */
 class MyMonitor implements ActionListener {
     MulticastUDP mf = null;
     public MyMonitor(MulticastUDP ttmf) {

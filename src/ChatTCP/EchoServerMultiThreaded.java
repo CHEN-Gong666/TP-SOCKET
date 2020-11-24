@@ -1,8 +1,8 @@
 /***
- * EchoServer
- * Example of a TCP server
- * Date: 10/01/04
- * Authors:
+ * EchoServerMultithread
+ * Server side main program
+ * Date: 24/11/2020
+ * Authors: Muye HE, Gong CHEN
  */
 
 package ChatTCP;
@@ -32,7 +32,7 @@ public class EchoServerMultiThreaded {
 	 * main method
 	 *
 	 * @param EchoServer port
-	 * @chatHistory the chat history
+	 * @param chatHistory the chat history
 	 **/
 	public static void main(String args[]) {
 		ServerSocket listenSocket;
@@ -57,7 +57,9 @@ public class EchoServerMultiThreaded {
 
 
 
-
+	/**
+	 * load chat history method
+	 **/
 	private static int loadChatHistory() throws IOException {
 		System.out.println("loading message");
 		try {
@@ -75,7 +77,10 @@ public class EchoServerMultiThreaded {
 		}
 		return 1;
 	}
-
+	/**
+	 * main method
+	 *make the message in a good format
+	 **/
 	private static int serializeMessage(String msg) {
 		msg = "message from:" +msg;
 		try {

@@ -39,6 +39,7 @@ public class EchoClient extends JFrame {
   *  main method
   *  accepts a connection, receives a message from client then sends an echo to the client
    *  creates the IHM of the chat
+   *  @param echoSocket the client socket
   **/
 
     public static void main(String[] args) throws IOException {
@@ -139,7 +140,7 @@ public class EchoClient extends JFrame {
 /**
  * The action listener method
  * it listens to the buttons to change name or send a message
- * @Echoclient the IHM as well as his attributes to modify
+ * @Echoclient the IHM including its' attributes to modify
  */
 
 class MyMonitor implements ActionListener {
