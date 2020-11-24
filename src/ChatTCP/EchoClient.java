@@ -106,7 +106,7 @@ public class EchoClient extends JFrame {
 
         //System.out.println("please enter your name");
         //clientName = stdIn.readLine();
-        TextOut.append("history:\n");
+        TextOut.append("the history is printed below:\n");
         TextOut.append(socIn.readLine()+'\n');
         while (true) {
 
