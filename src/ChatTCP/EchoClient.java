@@ -151,12 +151,14 @@ class MyMonitor implements ActionListener {
 
         }else {
             if (buttonName.equals("send")) {
-                mf.line = mf.clientName+": "+mf.TextIn.getText();
+                mf.line = mf.TextIn.getText();
                 mf.TextIn.setText("");
                 if (".exit".equals(mf.line)) {
-                    mf.line = "User: " + mf.clientName + " has left the chat\n";
+                    mf.line = "User: " + mf.clientName + " has left the chat";
+                    mf.socOut.println(mf.line);
+                    System.exit(1);
                 }
-                mf.socOut.println(mf.line);
+                mf.socOut.println(mf.clientName+": "+mf.line);
             } else {
                 JOptionPane.showMessageDialog(mf, "Unknown event" );
             }

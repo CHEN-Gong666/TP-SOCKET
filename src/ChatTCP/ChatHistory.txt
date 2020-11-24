@@ -1,6 +1,9 @@
 this is the chat history
 message server from:User: pseudo changed his name to: HE
-message server from:HE: hello
+message server from:HE: HELLO
 message server from:pseudo: hi
-message server from:HE: hello
+message server from:User: pseudo changed his name to: HE
+message server from:HE: HI
 message server from:User: pseudo changed his name to: CHEN
+message server from:CHEN: HELLO
+message server from:User: CHEN has left the chat
