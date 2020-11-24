@@ -1,8 +1,8 @@
 /***
  * EchoClient
- * Example of a TCP client 
- * Date: 10/01/04
- * Authors:
+ * IHM of a TCP client
+ * Date: 24/11/2020
+ * Authors: Muye HE, Cong CHEN
  */
 package ChatTCP;
 
@@ -20,9 +20,6 @@ import java.net.*;
 public class EchoClient extends JFrame {
 
     static String clientName = "pseudo";
-    public static String getClientName(){
-        return clientName;
-    }
     static JTextArea Name;
     static JTextArea TextOut;
     static JTextField TextIn;
@@ -106,9 +103,10 @@ public class EchoClient extends JFrame {
             System.exit(1);
         }
 
-        System.out.println("please enter your name");
-        clientName = stdIn.readLine();
-
+        //System.out.println("please enter your name");
+        //clientName = stdIn.readLine();
+        TextOut.append("history:\n");
+        TextOut.append(socIn.readLine()+'\n');
         while (true) {
 
         	if (stdIn.ready()){
@@ -120,7 +118,8 @@ public class EchoClient extends JFrame {
             }
 
         	if (socIn.ready()){
-        		System.out.println("echo: "+socIn.readLine());
+        		//System.out.println("echo: "+socIn.readLine());
+                TextOut.append(socIn.readLine()+'\n');
         	}
         	
         	try {
@@ -146,48 +145,18 @@ class MyMonitor implements ActionListener {
         if(buttonName.equals("Change Name")){
             String oldName = mf.clientName;
             mf.clientName = mf.Name.getText();
-            //mf.TextOut .append("You've changed your name to:"+mf.clientName+'\n');
-            //String msgString = "user: "+oldName+" changed his name to: "+mf.clientName+'\n';
-            //mf.msg = new DatagramPacket(msgString.getBytes(), msgString.length(), mf.groupAddr, mf.groupPort);
-            //try {
-               // mf.socket.send(mf.msg);
-            //} catch (IOException ioException) {
-                //ioException.printStackTrace();
-            //}
-            mf.line = "You've changed your name to:"+mf.clientName+'\n';
-            try {
-                if (mf.stdIn.ready()){
-                    mf.line=mf.stdIn.readLine();
-                    mf.socOut.println(mf.line);
-                }
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            mf.line = "User: "+oldName+" changed his name to: "+mf.clientName;
+            //System.out.println(mf.line+buttonName);
+            mf.socOut.println(mf.line);
 
         }else {
             if (buttonName.equals("send")) {
-                //mf.line = mf.TextIn.getText();
-                //mf.TextIn.setText("");
-                //if (mf.line.equals(".exit")){
-                    //String msgString = "User: "+mf.clientName + " has left the chat\n";
-                    //mf.msg = new DatagramPacket(msgString.getBytes(), msgString.length(), mf.groupAddr, mf.groupPort);
-                    //try {
-                        //mf.socket.send(mf.msg);
-                    //} catch (IOException ioException) {
-                        //ioException.printStackTrace();
-                    //}
-                    //System.exit(0);
-                //}else {
-                    //String msgString = mf.clientName + " : " + mf.line + '\n';
-                    //mf.msg = new DatagramPacket(msgString.getBytes(), msgString.length(), mf.groupAddr, mf.groupPort);
-                    //mf.TextOut.append(mf.clientName + " : " + mf.line+'\n');
-                    //try {
-                       // mf.socket.send(mf.msg);
-                    //} catch (IOException ioException) {
-                        //ioException.printStackTrace();
-                    //}
-
-                //}
+                mf.line = mf.clientName+": "+mf.TextIn.getText();
+                mf.TextIn.setText("");
+                if (".exit".equals(mf.line)) {
+                    mf.line = "User: " + mf.clientName + " has left the chat\n";
+                }
+                mf.socOut.println(mf.line);
             } else {
                 JOptionPane.showMessageDialog(mf, "Unknown event" );
             }

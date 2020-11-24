@@ -42,8 +42,8 @@ public class ClientThread extends Thread {
     		while (true) {
 
 				String line = socIn.readLine();
-				String outputLine = "Message from port " + clientSocket.getPort() + ": " + line;
-
+				//String outputLine = "Message from port " + clientSocket.getPort() + ": " + line+'\n';
+				String outputLine = line;
 				if (line.equals(".")) {
 					socketList.remove(this.clientSocket);
 					System.out.println(socketList);

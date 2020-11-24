@@ -1,5 +1,6 @@
-Message from port 58406: 1
-Message from port 58406: 2
-Message from port 58407: 3
-Message from port 58408: 4
-Message from port 58437: 5
+this is the chat history
+message server from:User: pseudo changed his name to: HE
+message server from:HE: hello
+message server from:pseudo: hi
+message server from:HE: hello
+message server from:User: pseudo changed his name to: CHEN

@@ -63,6 +63,7 @@ public class EchoServerMultiThreaded {
 			String line = br.readLine();
 			while (line != null) {
 				chatHistory.add(line);
+				//EchoClient.TextOut.append(line);
 				line = br.readLine();
 			}
 		} catch (Exception e) {
@@ -72,7 +73,7 @@ public class EchoServerMultiThreaded {
 	}
 
 	private static int serializeMessage(String msg) {
-		msg = "message from:"+EchoClient.getClientName()+msg;
+		msg = "message server from:" +msg;
 		try {
 			FileOutputStream fos = new FileOutputStream(filePath, true);
 			fos.write(msg.getBytes());
