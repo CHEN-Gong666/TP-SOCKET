@@ -1,3 +1,7 @@
 this is the chat history
+message from:pseudo: 192.168.56.1
 message from:User: pseudo changed his name to: HE
-message from:HE: Muye
+message from:HE: HI
+message from:pseudo: HI
+message from:User: pseudo changed his name to: CHEN
+message from:CHEN: HI

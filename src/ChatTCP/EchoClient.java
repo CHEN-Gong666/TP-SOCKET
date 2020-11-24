@@ -1,9 +1,3 @@
-/***
- * EchoClient
- * IHM of a TCP client
- * Date: 24/11/2020
- * Authors: Muye HE, Cong CHEN
- */
 package ChatTCP;
 
 
@@ -144,29 +138,29 @@ public class EchoClient extends JFrame {
  */
 
 class MyMonitor implements ActionListener {
-    EchoClient mf = null;
+    EchoClient mf;
     public MyMonitor(EchoClient ttmf) {
         this.mf = ttmf;
     }
     public void actionPerformed(ActionEvent e) {
         String buttonName = e.getActionCommand();
         if(buttonName.equals("Change Name")){
-            String oldName = mf.clientName;
-            mf.clientName = mf.Name.getText();
-            mf.line = "User: "+oldName+" changed his name to: "+mf.clientName;
+            String oldName = EchoClient.clientName;
+            EchoClient.clientName = EchoClient.Name.getText();
+            EchoClient.line = "User: "+oldName+" changed his name to: "+ EchoClient.clientName;
             //System.out.println(mf.line+buttonName);
-            mf.socOut.println(mf.line);
+            EchoClient.socOut.println(EchoClient.line);
 
         }else {
             if (buttonName.equals("send")) {
-                mf.line = mf.TextIn.getText();
-                mf.TextIn.setText("");
-                if (".exit".equals(mf.line)) {
-                    mf.line = "User: " + mf.clientName + " has left the chat";
-                    mf.socOut.println(mf.line);
+                EchoClient.line = EchoClient.TextIn.getText();
+                EchoClient.TextIn.setText("");
+                if (".exit".equals(EchoClient.line)) {
+                    EchoClient.line = "User: " + EchoClient.clientName + " has left the chat";
+                    EchoClient.socOut.println(EchoClient.line);
                     System.exit(1);
                 }
-                mf.socOut.println(mf.clientName+": "+mf.line);
+                EchoClient.socOut.println(EchoClient.clientName +": "+ EchoClient.line);
             } else {
                 JOptionPane.showMessageDialog(mf, "Unknown event" );
             }

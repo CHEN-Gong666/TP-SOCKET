@@ -1,8 +1,8 @@
-/***
- * ClientThread
- * Example of a TCP server
- * Date: 14/12/08
- * Authors:
+/*
+ ClientThread
+ Example of a TCP server
+ Date: 14/12/08
+ Authors:
  */
 
 package ChatTCP;
@@ -15,7 +15,7 @@ import java.util.LinkedList;
 
 public class ClientThread extends Thread {
 	private static LinkedList<String> chatHistory = EchoServerMultiThreaded.getChatHistory();
-  	private static ArrayList<Socket> socketList = new ArrayList<Socket>();
+  	private static ArrayList<Socket> socketList = new ArrayList<>();
 	private Socket clientSocket;
 
 	ClientThread(Socket s) {
@@ -29,7 +29,7 @@ public class ClientThread extends Thread {
 	public void run() {
     	  try {
 			  System.out.println("thread is running for port: " + clientSocket.getPort());
-			  BufferedReader socIn = null;
+			  BufferedReader socIn;
     			socIn = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
     			// PrintStream socOut = new PrintStream(clientSocket.getOutputStream());
 			  PrintStream socOut;

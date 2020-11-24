@@ -1,8 +1,8 @@
-/***
- * EchoServerMultithread
- * Server side main program
- * Date: 24/11/2020
- * Authors: Muye HE, Gong CHEN
+/*
+ EchoServerMultithread
+ Server side main program
+ Date: 24/11/2020
+ Authors: Muye HE, Gong CHEN
  */
 
 package ChatTCP;
@@ -21,19 +21,19 @@ public class EchoServerMultiThreaded {
 		return chatHistory;
 	}
 
-	public static int addHistory(String msg) {
+	public static void addHistory(String msg) {
 
 		System.out.println(chatHistory);
 		chatHistory.add(msg);
 		serializeMessage(msg);
-		return 1;
+		//return 1;
 	}
 
 	/**
 	 * main method
 	 * @param args the server port number
 	 **/
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		ServerSocket listenSocket;
 		if (args.length != 1) {
 			System.out.println("Usage: java EchoServer <EchoServer port>");
@@ -60,7 +60,7 @@ public class EchoServerMultiThreaded {
 	/**
 	 * load chat history method
 	 **/
-	private static int loadChatHistory() throws IOException {
+	private static void loadChatHistory() throws IOException {
 		System.out.println("loading message");
 		try {
 			InputStreamReader reader = new InputStreamReader(new FileInputStream(file));
@@ -75,12 +75,12 @@ public class EchoServerMultiThreaded {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return 1;
+		// 1;
 	}
 	/**
 	 *make the message in a good format
 	 **/
-	private static int serializeMessage(String msg) {
+	private static void serializeMessage(String msg) {
 		msg = "message from:" +msg;
 		try {
 			FileOutputStream fos = new FileOutputStream(filePath, true);
@@ -90,7 +90,7 @@ public class EchoServerMultiThreaded {
 			e.printStackTrace();
 		}
 
-		return 1;
+		//return 1;
 	}
 }
 
