@@ -39,6 +39,8 @@ public class ClientThread extends Thread {
 				  socOut.println(m);
 			  }
 
+			  System.out.println(socketList);
+			  System.out.println("\n");
     		while (true) {
 
 				String line = socIn.readLine();
@@ -47,6 +49,7 @@ public class ClientThread extends Thread {
 				if (line.equals(".exit")) {
 					socketList.remove(this.clientSocket);
 					System.out.println(socketList);
+					System.out.println("\n");
 					this.stop();
 					break;
 				}
@@ -54,7 +57,7 @@ public class ClientThread extends Thread {
 				EchoServerMultiThreaded.addHistory(outputLine);
 
 				System.out.println(outputLine);
-				System.out.println(socketList);
+				//System.out.println(socketList);
 
 			    for(Socket socket: socketList){
 					socOut = new PrintStream(socket.getOutputStream());

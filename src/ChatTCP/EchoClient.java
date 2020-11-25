@@ -163,6 +163,8 @@ class MyMonitor implements ActionListener {
                 if (".exit".equals(EchoClient.line)) {
                     EchoClient.line = "User: " + EchoClient.clientName + " has left the chat";
                     EchoClient.socOut.println(EchoClient.line);
+                    EchoClient.line = ".exit";
+                    EchoClient.socOut.println(EchoClient.line);
                     System.exit(1);
                 }
                 EchoClient.socOut.println(EchoClient.clientName +": "+ EchoClient.line);

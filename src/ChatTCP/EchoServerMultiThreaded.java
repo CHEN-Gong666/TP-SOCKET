@@ -81,7 +81,7 @@ public class EchoServerMultiThreaded {
 	 *make the message in a good format
 	 **/
 	private static void serializeMessage(String msg) {
-		msg = "message from:" +msg;
+		//msg = "message from:" +msg;
 		try {
 			FileOutputStream fos = new FileOutputStream(filePath, true);
 			fos.write(msg.getBytes());
