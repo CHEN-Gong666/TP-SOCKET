@@ -102,6 +102,9 @@ public class EchoClient extends JFrame {
 
         //System.out.println("please enter your name");
         //clientName = stdIn.readLine();
+        TextOut.append("You can enter your user name in the text field below\n");
+        TextOut.append("You can entre '.exit' to leave the chat\n");
+        TextOut.append("\n");
         TextOut.append("the history is printed below:\n");
         TextOut.append(socIn.readLine()+'\n');
         while (true) {
