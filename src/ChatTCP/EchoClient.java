@@ -20,7 +20,7 @@ public class EchoClient extends JFrame {
     static JPanel Panel;
     static JButton Send;
     static JButton ChangeName;
-    static JScrollPane Scroll;
+    //static JScrollPane Scroll;
 
     static Socket echoSocket;
     static PrintStream socOut;
@@ -107,6 +107,8 @@ public class EchoClient extends JFrame {
         TextOut.append("\n");
         TextOut.append("the history is printed below:\n");
         TextOut.append(socIn.readLine()+'\n');
+        line = clientName+": has joined the chat";
+        socOut.println(line);
         while (true) {
 
         	if (stdIn.ready()){
