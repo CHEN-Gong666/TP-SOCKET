@@ -1,0 +1,9 @@
+this is the chat history
+pseudo: has joined the chat
+pseudo: has joined the chat
+pseudo: HELLO
+User: pseudo changed his name to: HE
+pseudo: HELLO
+User: pseudo changed his name to: HE
+User: HE has left the chat
+User: HE has left the chat
