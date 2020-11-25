@@ -58,7 +58,7 @@ public class ClientThread extends Thread {
 
 			    for(Socket socket: socketList){
 					socOut = new PrintStream(socket.getOutputStream());
-					System.out.println(outputLine);
+					//System.out.println(outputLine);
 					socOut.println(outputLine);
 			    }
     		}
