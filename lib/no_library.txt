@@ -1,0 +1,2 @@
+this project has no external library except for the JDK
+we use the open JDK 15
