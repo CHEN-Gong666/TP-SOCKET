@@ -212,6 +212,7 @@ class MyMonitor implements ActionListener {
                     mf.msg = new DatagramPacket(msgString.getBytes(), msgString.length(), mf.groupAddr, mf.groupPort);
                     try {
                         mf.socket.send(mf.msg);
+                        mf.socket.leaveGroup(mf.groupAddr);
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }
