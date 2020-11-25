@@ -95,7 +95,8 @@ public class MulticastUDP extends JFrame{
 
             //stdIn = new BufferedReader(new InputStreamReader(System.in));
 
-            TextOut.append("enter your user name\n");
+            TextOut.append("You can enter your user name in the text field below\n");
+            TextOut.append("You can entre '.exit' to leave the chat\n");
             //System.out.print( "Please enter your name : \n" );
 
             aUDP.socket = new MulticastSocket(aUDP.groupPort);
